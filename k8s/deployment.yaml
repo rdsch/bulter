@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jack
+  template:
+    metadata:
+      labels:
+        app: jack
+    spec:
+      containers:
+      - image: okteto.dev/jack:latest
+        name: jack
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: ProxySite
+          value: "mirror.umd.edu"
+        - name: Vless_UUID
+          value: "cf4dc887-108e-463d-9b54-d2eb2ff8d7d0"
+        - name: Vless_Path
+          value: "/g322"
+        - name: Vmess_UUID
+          value: "cf4dc887-108e-463d-9b54-d2eb2ff8d7d0"
+        - name: Vmess_Path
+          value: "/g442"
+        - name: Share_Path
+          value: "/share233"
