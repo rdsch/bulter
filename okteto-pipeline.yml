@@ -1,8 +1,21 @@
-on:
-  schedule:
-    - cron: 10 22 * * *
 
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron:  '30 5,17 * * *'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
 deploy:
   - okteto build -t okteto.dev/jack:latest
   - kubectl apply -f k8s/service.yml
   - envsubst < k8s/deployment.yaml | kubectl apply -f -
+
+
+
+
