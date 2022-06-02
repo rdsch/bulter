@@ -1,0 +1,21 @@
+name: ok auto
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron:  '30 5,17 * * *'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: entrypoint
+        run: |
+          ./entrypoint.sh
